@@ -121,29 +121,26 @@ function transaction($test_res, $conf, $is_formal = 1)
 		unlink($file);
 	}
 }
-/*Array
-(
-    [0] => Array
-        (
-            [gameprovider] => og // 游戏供应商
-            [membername] => mog_bill66 // 玩家账号
-            [gamename] => Baccarat // 游戏名称
-            [bettingcode] => 10720157001 // 游戏商注单编号，唯一
-            [bettingdate] => /Date(1521791416000)/ // 交易时间
-            [gameid] => C2     // 桌号
-            [roundno] => 21-47 // 靴号-局号 第幾靴第幾局
-            [result] => // 游戏结果
-            [bet] => 101 // 下注區域 可以由剛剛那一份文檔查
-            [winloseresult] => 2 // 輸贏結果 文檔中也有提供 输 = 1,赢 = 2,和 = 3,无效=4,未结算=5
-            [bettingamount] => 10 // 下注額
-            [validbet] => 10 // 有效投注
-            [winloseamount] => 10 // 輸贏金額
-            [balance] => 60 // 余额
-            [currency] => RMB // 货币
-            [handicap] => // 保留字段
-            [status] => 101^10.0^10.0^, // status 格式是 下注區域^下注金額^輸贏金額 這部分在某些遊戲可能會有多組 例如輪盤 翻攤 骰寶
-            [gamecategory] => live // 游戏类型
-            [settledate] => // 保留字段
-            [remark] => // 备注
-        )
-)*/
+
+/**
+* test
+*/
+class P
+{
+    
+    function __construct()
+    {
+        echo 'chushihuachenggong.';
+    }
+
+    public function say()
+    {
+        echo 'hello';
+    }
+}
+
+$p = new P();
+$p->say();
+
+echo 'there are  ', $argc ,' parameters';
+print_r($argv);
