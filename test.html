@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script type="text/javascript">
+        var ws_server = 'ws://localhost:8080';
+        var ws = new WebSocket(ws_server, 'echo-protocol');
+        ws.onopen = function(e) {
+            console.log('connect to WebSocket server');
+        }
+        ws.onclose = function(e) {
+            console.log('disconnected');
+        }
+        ws.onmessage = function(e) {
+            console.log('resept data from server: '+ e.data);
+        }
+        ws.onerror = function(evt, e) {
+            console.log('error occured: '+ evt.data);
+        }
+    </script>
+</head>
+<body>
+<code>qwer</code>
+<pre>asdf</pre>
+</body>
+</html>
