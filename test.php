@@ -518,6 +518,26 @@ $str = 'hello ivy';
 $key = 'str';
 var_export(!!$$key);
 
+// result_pc 北京PC28开奖结果
+// yc_pc 北京PC28预测
+// result_jnd 加拿大PC28
+// yc_jnd
+// result_xj_10 新疆PC28 新疆时时彩
+// yc_xj
+// result_cq_10 重庆PC28
+// yc_cq
+// result_cq_10 重庆时时彩
+// result_pk_10 北京PK10
+// result_nc_10 幸运农场
+// result_gd_10 广东快乐十分
+// result_six_10 六合彩
+// re11_six 六合彩
+// result_dm
+// 抓奖-存入数据库（mysql、redis）-显示
+// 不断读redis
+// redis应用
+// 限制接口请求频率
+
 // 
 // 获取奖励
 // 放在user表时count() > 5，根据member_link_id在member_link找到user_id
