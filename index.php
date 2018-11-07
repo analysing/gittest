@@ -1,4 +1,9 @@
 <?php
+echo 'hello ivy';
+session_name('bill00');
+session_start();
+echo '<br>', $_SESSION['gender'];
+
 defined('CTRL_PATH') or define('CTRL_PATH', __DIR__ .'/controllers/');
 defined('VIEW_PATH') or define('VIEW_PATH', __DIR__ .'/views/');
 defined('VENDOR_PATH') or define('VENDOR_PATH', __DIR__ .'/vendors/');

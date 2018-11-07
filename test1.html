@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bill</title>
+</head>
+<body>
+I am the king of the world.
+<!-- <script type='text/javascript' src='https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js'></script>
+<script type="text/javascript">
+	$(function () {
+        var arr = [
+            {
+                img:"http://1877119.com/wxsd.png",
+                url:  "http://vip.baping68.com/wx/?i=60",
+                mobileUrl: "https://m.baidu.com",
+            },
+            {
+                img:"http://1877119.com/wxts.png",
+                url:  "http://vip.baping68.com/wx/?i=64",
+                mobileUrl: "https://m.baidu.com",
+            },
+            {
+                img:"http://1877119.com/wxxb.png",
+                url:  "http://vip.baping68.com/wx/?i=65",
+                mobileUrl: "https://m.baidu.com",
+            },
+            {
+                img:"http://1877119.com/wxxh.png",
+                url:  "http://vip.baping68.com/wx/?i=66",
+                mobileUrl: "https://m.baidu.com",
+            },
+            {
+                img:"http://1877119.com/wxxy.png",
+                url:  "http://vip.baping68.com/wx/?i=67",
+                mobileUrl: "https://m.baidu.com",
+            },
+        ];
+        var index ;
+        if(!sessionStorage&&sessionStorage.setItem){
+            var sessionIndex = sessionStorage.getItem("index");
+            if(sessionIndex===undefined){
+                index = 0;
+            }else if(parseInt(sessionIndex)<arr.length-1){
+                index = parseInt(sessionIndex)+1;
+            }else{
+                index=0;
+            }
+            sessionStorage.setItem("index",index);
+        }else{
+            index = Math.floor(arr.length*Math.random());
+        }
+        var divEle = $("<div>");
+        divEle.attr("id","js-wrap");
+        divEle.attr("style","position: fixed;width: 100%;height: 100%;z-index: 999999;top: 0;left: 0;background: rgba(0,0,0,.3);");
+        divEle.html('<img id="js-inner-img" style="display: block;max-width: 500px;width: 80%;margin:100px auto 0;" src="'+arr[index].img+'"><p style="color:#fff;text-align: center" id="js-p">10秒之后自动关闭</p>')
+        $("body").append(divEle);
+        $("#js-inner-img").on("click",function () {
+            var finalUrl = arr[index].url;
+            if (isMobile()) {
+                finalUrl = arr[index].mobileUrl;
+            }
+            window.open(finalUrl);
+            $("#js-inner-img").hide();
+            $("#js-wrap").hide();
+        });
+        var time=10;
+        setInterval(function () {
+            time--;
+            if("#js-inner-img"&&time===0){
+                $("#js-inner-img").hide();
+                $("#js-wrap").hide();
+            }
+            $("#js-p").html(time+"秒之后自动关闭")
+        },1000)
+    })
+
+    function isMobile() {
+        var u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
+            return true;
+        }else if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script> -->
+<script>
+    // window.parent.document.title = 'ivy';
+    window.top.document.title = 'ivyivy';
+    if (/^\d+$/.test('11')) {alert('ivy');}
+    else {alert('bill')}
+</script>
+</body>
+</html>

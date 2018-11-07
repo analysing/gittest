@@ -1,27 +1,44 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>test</title>
-    <script type="text/javascript">
-        var ws_server = 'ws://localhost:8080';
-        var ws = new WebSocket(ws_server, 'echo-protocol');
-        ws.onopen = function(e) {
-            console.log('connect to WebSocket server');
-        }
-        ws.onclose = function(e) {
-            console.log('disconnected');
-        }
-        ws.onmessage = function(e) {
-            console.log('resept data from server: '+ e.data);
-        }
-        ws.onerror = function(evt, e) {
-            console.log('error occured: '+ evt.data);
-        }
-    </script>
-</head>
-<body>
-<code>qwer</code>
-<pre>asdf</pre>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title>test page</title>
+        <script type="text/javascript">
+            // 获取上个月最后一天
+            function getLastMonthLastDay() {
+                var now = new Date();
+                var y = now.getFullYear();
+                var m = now.getMonth();
+                if (m == 0) {m = 12}
+                var date = new Date(y, m, 0);
+                return y +'-'+ m +'-'+ date.getDate();
+            }
+            document.write(getLastMonthLastDay());
+            alert('hahaha..');
+            var ws_server = 'ws://localhost:8080';
+            var ws = new WebSocket(ws_server, 'echo-protocol');
+            ws.onopen = function(e) {
+                console.log('connect to WebSocket server');
+            }
+            ws.onclose = function(e) {
+                console.log('disconnected');
+            }
+            ws.onmessage = function(e) {
+                console.log('resept data from server: '+ e.data);
+            }
+            ws.onerror = function(evt, e) {
+                console.log('error occured: '+ evt.data);
+            }
+        </script>
+    </head>
+    <body>
+        <a href="#">click me!</a>
+        <!-- <form action="test.php" method="POST">
+            <input type="text" name="type['a']">
+            <input type="text" name="type['b']">
+            <input type="text" name="type['c']">
+            <input type="text" name="type['d']">
+            <input type="submit" value="submit">
+        </form> -->
+        <!-- <iframe src="test1.html"></iframe> -->
+    </body>
 </html>
