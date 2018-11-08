@@ -518,6 +518,13 @@ $str = 'hello ivy';
 $key = 'str';
 var_export(!!$$key);
 
+$a = [json_encode(['aa', 'bb', 'cc']), json_encode(['d' => 'dd', 'ee', 'ff', 'gg']), ['hh', 'ii']];
+echo '<pre>';
+var_dump($a);
+var_dump(json_decode(json_encode($a), true)); // 不能解开内部的json
+echo '</pre>';
+echo json_encode($a);
+
 // result_pc 北京PC28开奖结果
 // yc_pc 北京PC28预测
 // result_jnd 加拿大PC28
