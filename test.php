@@ -525,6 +525,14 @@ var_dump(json_decode(json_encode($a), true)); // 不能解开内部的json
 echo '</pre>';
 echo json_encode($a);
 
+// 
+// hset(lottery, issue, info);
+// set(lottery, issue);
+// zadd(lottery, issue, )
+// hget(key, field) 获取hash，key键、field域
+// hset(key, field, value) 设置hash，value值
+// zadd(key, score, member) 设置sorted set有序集合，score分（排序分值，可重复），member成员（值，唯一）
+// zremrangebyrank(key, start, stop) 移除sorted set，start开始索引，stop停止索引
 // result_pc 北京PC28开奖结果
 // yc_pc 北京PC28预测
 // result_jnd 加拿大PC28
