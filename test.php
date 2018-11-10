@@ -518,6 +518,13 @@ $str = 'hello ivy';
 $key = 'str';
 var_export(!!$$key);
 
+$a = ['issue' => json_encode(['name' => 'bill', 'email' => 'bill@user.com', 'profile' => 'hahaha..']), 'issue1' => json_encode(['name' => 'ivy', 'email' => 'ivy@user.com', 'profile' => 'hello world'])];
+echo '<pre>';
+var_dump($a);
+$b = json_decode(json_encode($a), true);
+var_dump(json_decode($b['issue'], true));
+echo '</pre>';
+
 // result_pc 北京PC28开奖结果
 // yc_pc 北京PC28预测
 // result_jnd 加拿大PC28
@@ -537,6 +544,22 @@ var_export(!!$$key);
 // 不断读redis
 // redis应用
 // 限制接口请求频率
+
+// hset(lottery1-10, issue, info);
+// hvals(lottery1-10); // 获取所有info
+// hkeys(lottery1-10); // 获取所有issue
+// hget(lottery1-10, issue); // 根据issue获取info
+// zadd(latest, issue, lottery1-10); // 保存最新的奖期，插入时设置
+// zscore(latest, lottery1-10); // 获取某个彩种最新奖期
+// in_array(issue, hkeys); // 没有则加
+// hset(lottery1-10, i, issue); // 获取单期时设置
+// in_array(zscore, hvals); // 没有则设置，使用最新奖期检测
+// 默认保存200期的数据，定期清理超过200期数据
+// 
+// 拉取奖期时插入数据库和redis
+// 
+// 
+// 
 
 // 
 // 获取奖励
