@@ -1,10 +1,14 @@
 [文件](https://markdown.tw)
 [资源](https://markdown.tw/resources.html)
 [标准](commonmark.org)
-[错误报告](https://github.com/othree/markdown-syntax-zhtw/issues)
+[错误报告][err_report]
+
+[err_report]:https://github.com/othree/markdown-syntax-zhtw/issues
 
 # Markdown文件
-![markdown](https://markdown.tw/images/208x128.png)
+![markdown][8xian]
+
+[8xian]:https://markdown.tw/images/208x128.png
 
 **Note**: This is Traditional Chinese Edition Document of Markdown Syntax. If you are seeking for English Edition Document. Please refer to [Markdown: Syntax](http://daringfireball.net/projects/markdown/syntax).
 
@@ -27,7 +31,7 @@
   - [代码](https://markdown.tw/#code)
   - [图片](https://markdown.tw/#img)
 + [其他](https://markdown.tw/#misc)
-  - [跳脱字元](https://markdown.tw/#backslash)
+  - [转义字符](https://markdown.tw/#backslash)
   - [自动链接](https://markdown.tw/#autolink)
 + [感谢](https://markdown.tw/#acknowledgement)
 
@@ -44,9 +48,9 @@ Markdown的目标是实现「易读易写」。
 因此Markdown的语法全由标点符号所组成，并经过严谨慎选，是为了让它们看起来就像所要表达的意思。像是在文字两旁加上星号，看起来就像*强调*。Markdown的清单看起来，嗯，就是清单。加入你有使用过电子邮件，区块引用看起来就真的像是引用一段文字。
 
 ## 行内HTML
-Markdown的语法有个主要的目的：用来作为一种网络内容的写作用语言。
+Markdown的语法有个主要的目的：用来作为一种网络内容的*写作*用语言。
 
-Markdown不是用来取代HTML，甚至也没有要和它相似，它的语法种类不多，只和HTML的一部分有关系，重点不是要创造一种更容易写作HTML文件的语法，我认为HTML已经很容易写了，Markdown的重点在于，它能让文件更容易阅读、编写。HTML 是一种发布的格式，Markdown是一种编写的格式，因此，Markdown的格式语法只涵盖纯文字可以涵盖的范围。
+Markdown不是用来取代HTML，甚至也没有要和它相似，它的语法种类不多，只和HTML的一部分有关系，重点*不是*要创造一种更容易写作HTML文件的语法，我认为HTML已经很容易写了，Markdown的重点在于，它能让文件更容易阅读、编写。HTML 是一种发布的格式，Markdown是一种编写的格式，因此，Markdown的格式语法只涵盖纯文字可以涵盖的范围。
 
 不在Markdown涵盖范围之外的标签，都可以直接在文件里面用HTML撰写。不需要额外标注这是HTML或是Markdown；只要直接加标签就可以了。
 
@@ -75,4 +79,120 @@ HTML区段标签和区块标签不同，在区段标签的范围内，Markdown�
 
 在HTML文件中，有两个字符需要特殊处理：<和&。<符号用于起始标签&符号则用于标记HTML实体，如果你只是想要使用这些符号，你必需要使用实体的形式，像是`&lt;`和`&amp;`。
 
-& 符號其實很容易讓寫作網路文件的人感到困擾，如果你要打「AT&T」 ，你必須要寫成「AT&amp;T」 ，還得轉換網址內的 & 符號，如果你要連結到：
+& 符号其实很容易让协作网络文件的人感到困扰，如果你要打「AT&T」，你必须要写成「AT&amp;T」，还得转换网址内的 & 符号，如果你要链接到：
+
+`http://images.google.com/images?num=30&q=larry+bird`
+
+你必须要把网址转换成：
+
+`http://images.google.com/images?num=30&amp;q=larry+bird`
+
+才能放到链接标签的href属性里。不用说也知道这很容易忘记，这也可能是HTML标准检查所检查到的错误中，数量最多的。
+
+Markdown允许你直接使用这些符号，但是你要小心跳脱字元的使用，如果你是在HTML试题中使用&符号的话，它不会被转换，而在其他情形下，它则会被转换成`&amp;`。所以你如果要在文件中插入一个著作权的符号，你可以这样写：
+
+`&copy;`
+
+Markdown将不会对这段文字做修改，但是如果你这样写：
+
+`AT&T`
+
+Markdown就会将它转为：
+
+`AT&amp;T`
+
+类似的状况也会发生在<符号上，因为Markdown支援[行内 HTML](https://markdown.tw/#html)，如果你是使用<符号作为HTML标签使用，那Markdown也不会对它做任何转换，但是如果你是写：
+
+`4 < 5`
+
+Markdown将会把它转换为：
+
+`4 &lt; 5`
+
+不过需要注意的是，code范围内，不论是行内还是区块，<和&两个符号都一定会被转换成HTML实体，这项特性让你可以很容易地用Markdown写HTML code（和HTML相对而言。在HTML语法中，你要把所有的<和&都转换为HTML实体，才能在HTML文件里面写出HTML code。）
+
+---
+
+# 区块元素
+## 段落和换行
+
+一个段落是由一个以上相连接的行句组成，而一个以上的空行则会切分出不同的段落（空行的定义是显示上看起来像是空行，变回被视为空行。比方说，若某一行只包含空白和tab，则该行也会被视为空行），一般的段落不需要用空白或断行缩排。
+
+「一个以上相连接的行句组成」这句话其实俺是了Markdown允许段落内的强迫断行，这个特性和其他大部分的text-to-HTML格式不一样（包括 MovableType的 「Convert Line Breaks」选项），其他的格式会把每个断行都转成`<br />`标签。
+
+如果你真的想要插入`<br />`标签的话，在行尾加上两个以上的空白，然后按enter。
+
+是的，这确实需要花比较多功夫来插入`<br />`，但是「每个换行都转换为`<br />`」的方法在Markdown中并不适合，Markdown中email式的[区块引用](https://markdown.tw/#blockquote)和多段落的[清单](https://markdown.tw/#list)在使用换行来排版的时候，不但更好用，还更好阅读。
+
+## 标题
+
+## 表格
+
+|name|hobby|gender|birth|
+|:---|---:|---|:---:|
+|左对齐|右对齐|左对齐|中间对齐|
+|bill|sleep|male|8.6|
+|ivy|play game|female|5.1|
+|admin|unknow|male|1.1|
+|sa|unknow|male|1.1|
+|root|unknow|male|1.1|
+|8xian|eat|female|5.1|
+|xiaolu|smile|female|5.1|
+
+
+<table>
+<tr>
+<th>name</th>
+<th>hobby</th>
+<th>gender</th>
+<th>birth</th>
+</tr>
+<tr>
+<td>左对齐</td>
+<td align="right">右对齐</td>
+<td>左对齐</td>
+<td align="center">中间对齐</td>
+</tr>
+<tr>
+<td>bill</td>
+<td>sleep</td>
+<td>male</td>
+<td align="center">8.6</td>
+</tr>
+<tr>
+<td>ivy</td>
+<td>play game</td>
+<td>female</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>admin</td>
+<td>unknow</td>
+<td>male</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>sa</td>
+<td>unknow</td>
+<td>male</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>root</td>
+<td>unknow</td>
+<td>male</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>8xian</td>
+<td>eat</td>
+<td>female</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>xiaolu</td>
+<td>smile</td>
+<td>female</td>
+<td>5.1</td>
+</tr>
+</table>
