@@ -82,6 +82,16 @@ TAjDxSU7bIu0a4Q7oQIDAQAB
         openssl_private_decrypt($data, $decrypted, $this->privateKey);
         return $decrypted;
     }
+
+    public function opensslEncrypt($data, $key)
+    {
+        return openssl_encrypt($data, 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+    }
+
+    public function opensslDecrypt($data, $key)
+    {
+        return openssl_decrypt($data, 'AES-128-ECB', $key, OPENSSL_RAW_DATA); // openssl_get_cipher_methods()获取可用的加密算法
+    }
 }
 
 /*$r = new Rsa();
@@ -89,3 +99,26 @@ $res = $r->publicEncrypt(base64_encode('hello ivy'));
 // echo '<br>privateKey:', $r->privateKey;
 // echo '<br>publicKey:', $r->publicKey;
 echo '<br>decrypt:', base64_decode($r->privateDecrypt($res));*/
+
+$r = new Rsa();
+$datas = 'dlVLwVcCPxy+Mkp5P02/4ymudPLbsrhkvq7OAacDaL+5pPrmcp5p+2SAVp0rGpXLxBwdDVTKOsolYBmqE3ZnsP0/viGWUqaY6q1O6epusL5o1rqWIP7ysjWXebtRixBYwgmQl2NrfgELEFySKwDUHbu0XZbd/8FpkK/heq0m0Dc='; // 0123456789abcdef
+$datas = 'oT5YYR/RiFtDyDD63h6KN1TlrnmdVibc0RuooZt1s6QMWeTfc8J6Mg3BJVe1FyTQdJ7FtA6sivXdFCrgjmoX7/f7c7ieu/P1nGYBESYaM6Ed0Pdpr/uVVOrXfahnV+XckVFJcMMn0UGu4ATycNbw0bBGCMAQkqR1Z3cYsl+KALg='; // 0123456789abcdef
+$datas = '9aBSn6Z7+h82X4qI/1jRSvxSZupgXRJhPjtSwQFhJZSDM8RZC5VEHsF4s9xjQcx7WXhuD7pWkIeC6LfTtbXQ+3cboe+UEaTqyS20L6vgcWXPnERDt2hS7he/NWalGq6U';
+$datas = 'IueNFWirtBAWeXUKsWNyKOai3C3uDkpT2Zl50vXPmuAPfLGkOmUcsPYiG6cjEXc0CmmjMgUUbBUBcpBOFv+/xgj/cDDRFJr1OEmZYFAEcY7ld0LTC3q3JwqdKfAZqI+O';
+$datas = 'IueNFWirtBAWeXUKsWNyKLyYAVX0HL+oqWgG4qnhr4e/mQv93G81hIIcFt7KKqsO';
+echo mb_strlen(base64_decode($datas));
+$crypto = '';
+foreach (str_split(base64_decode($datas), 128) as $chunk) {
+    $res = $r->privateDecrypt($chunk);
+    $crypto .= $res;
+}
+var_dump(json_decode($crypto, true));
+
+$res = openssl_decrypt(base64_decode($datas), "AES-128-ECB", '0123456789abcdef', OPENSSL_RAW_DATA);
+var_dump(json_decode($res, true));
+
+// print_r(openssl_get_cipher_methods()); // 列出可用的加密方法
+
+$key = 'ivyivy1234!';
+$encrypt = base64_encode($r->opensslEncrypt('ivy1234', $key));
+echo $r->opensslDecrypt(base64_decode($encrypt), $key);
