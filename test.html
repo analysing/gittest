@@ -2,9 +2,10 @@
     <head>
         <meta charset="utf-8">
         <title>test page</title>
+        <script type="text/javascript" src="test.js"></script>
         <script type="text/javascript">
             // 获取上个月最后一天
-            function getLastMonthLastDay() {
+            /*function getLastMonthLastDay() {
                 var now = new Date();
                 var y = now.getFullYear();
                 var m = now.getMonth();
@@ -27,10 +28,40 @@
             }
             ws.onerror = function(evt, e) {
                 console.log('error occured: '+ evt.data);
-            }
+            }*/
+            var obj = {
+                proprety_id: 'hahaha...'
+                , func: function() {
+                    alert(this.proprety_id);
+                }
+            };
+            obj.func();
+            (function(str) {
+                alert(str);
+            })('ivy1234');
+
+            document.write(cfg.name +' '+ cfg.hobby);
+            // alert(!/^\d+$/.test('123a12'));
         </script>
+        <style type="text/css">
+            #rocket-to-top {
+                background:url("images/rocket_button_up.png") no-repeat scroll 0 0 transparent;
+                cursor:default;
+                display:block;
+                height:200px;
+                margin:-25px 0 0;
+                overflow:hidden;
+                padding:0;
+                position:fixed;
+                right:0;
+                top:70%;
+                width:88px;
+                z-index:11;
+            }
+        </style>
     </head>
     <body>
+        <div id="rocket-to-top"></div>
         <a href="#">click me!</a>
         <!-- <form action="test.php" method="POST">
             <input type="text" name="type['a']">

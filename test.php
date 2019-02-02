@@ -1,4 +1,5 @@
 <?php
+require_once 'functions.php';
 class Db
 {
 
@@ -44,10 +45,10 @@ echo '<br>';
 $message = 'hello';
 
 // 没有 "use"
-$example = function () {
+/*$example = function () {
     var_dump($message);
 };
-echo $example();
+echo $example();*/
 
 // 继承 $message
 $example = function () use ($message) {
@@ -522,16 +523,253 @@ $a = ['issue' => json_encode(['name' => 'bill', 'email' => 'bill@user.com', 'pro
 echo '<pre>';
 var_dump($a);
 $b = json_decode(json_encode($a), true);
-var_dump(json_decode($b['issue'], true));
+var_dump(json_decode($b['issue'], true)); // 不能解开内部的json
 echo '</pre>';
 
-$a = [json_encode(['aa', 'bb', 'cc']), json_encode(['d' => 'dd', 'ee', 'ff', 'gg']), ['hh', 'ii']];
-echo '<pre>';
+eval('$a = [2,2,4,5,1,4,4];');
+eval("\$a = [2,2,4,5,1,4,4];");
+// $a = '[2,2,4,5,1,4,4]';
 var_dump($a);
-var_dump(json_decode(json_encode($a), true)); // 不能解开内部的json
+echo '<pre>';
+var_dump(unserialize('a:1:{i:0;a:9:{s:6:"is_use";s:1:"1";s:10:"start_time";s:8:"05:00:00";s:14:"first_end_time";s:8:"09:07:00";s:8:"end_time";s:8:"23:59:59";s:5:"cycle";s:3:"300";s:8:"end_sale";s:2:"60";s:9:"drop_time";s:2:"60";s:9:"code_time";s:1:"0";s:9:"frag_sort";s:1:"0";}}'));
 echo '</pre>';
-echo json_encode($a);
 
+$data = ['a', 'a', 'a', 'a', 'b', 'b', 'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'a', 'a'];
+
+
+$arr = dewdrop_handle($data);
+$dewdrop = get_last_dewdrop($arr);
+$arr = add_element($arr, 'a');
+echo '<pre>';
+print_r($arr);
+print_r($dewdrop);
+echo '</pre>';
+echo '<table>';
+for ($i=0; $i < count($arr); $i++) { 
+    echo '<tr>';
+    for ($j=0; $j < 8; $j++) { 
+        echo '<td>', isset($arr[$i][$j]) ? $arr[$i][$j] : '' ,'</td>';
+    }
+    echo '</tr>';
+}
+echo '</table>';
+// echo implode(',', 1);
+echo '8线';
+// echo 'QQ1123089414905096P';
+// echo number_format('10,000.0000', 4);
+echo '<br>', date('Y-m-d H:i:s', 1543049008);
+// var_dump(openssl_pkey_get_private(file_get_contents('rsa_private_key.pem')));
+// require_once 'Rsa.php';
+// $r = new Rsa();
+// $res = $r->publicEncrypt(base64_encode('hello ivy'));
+// echo '<br>privateKey:', $r->privateKey;
+// echo '<br>publicKey:', $r->publicKey;
+// echo '<br>decrypt:', base64_decode($r->privateDecrypt($res));
+// $wx = 'wx_sdf45123';
+// var_dump(preg_match('`^[a-zA-Z0-9][a-zA-Z0-9_\-]{5,19}$`', $wx));
+function chk_prize($prize, $open_zodiac, $zodiac = '狗')
+{
+    $level = 0;
+    $betZodiac = explode('_', $prize); // 家禽_野兽
+    if ($betZodiac[0] == '家禽') {
+        $arr = ['猪','狗','鸡','羊','马','牛'];
+        if (in_array($open_zodiac, $arr)) {
+            $level = in_array($zodiac, $arr) ? 2 : 1;
+        }
+    }
+    if ($betZodiac[0] == '野兽' || isset($betZodiac[1])) {
+        $arr = ['鼠','猴','蛇','龙','兔','虎'];
+        if (in_array($open_zodiac, $arr)) {
+            $level = in_array($zodiac, $arr) ? 2 : 1;
+        }
+    }
+    return $level;
+}
+echo '<br>', chk_prize('家禽_野兽', '马');
+var_dump(json_decode(null, true));
+$a = [['name' => 'bill'], ['name' => 'ivy']];
+echo '<br>', current($a)['name'];
+$issue = '2018150';
+echo $next_issue = substr(++$issue, 0, 4) == 2017 ? $issue : date('Y') .'001';
+$path = 'https://m.xy0test.com//images_fh/upload/2017/12/1514266527757.jpg';
+preg_match('@.*(images_fh.*)$@', $path, $macth);
+echo $s = isset($macth[1]) ? $macth[1] : '';
+$arr = ['n1' => 'bill', 'n2' => 'ivy'];
+$res = '{"errorCode":0,"message":"操作成功","result":{"businessCode":0,"data":{"preDrawCode":"05,06,10,12,14,15,21,24,26,28,33,40,44,56,57,61,65,67,68,80,01","drawIssue":926698,"drawTime":"2018-12-17 17:25:00","preDrawTime":"2018-12-17 17:20:00","preDrawDate":"2018-12-17 00:00:00","preDrawIssue":926697,"drawCount":100,"sumNum":732,"sumBigSmall":-1,"sumSingleDouble":-1,"sdrawCount":"","singleDoubleCount":-1,"frontBehindCount":1,"sumBsSd":4,"sumWuXing":2,"status":0,"frequency":"","lotCode":10014,"iconUrl":"","shelves":1,"groupCode":7,"lotName":"北京快乐8","totalCount":179,"serverTime":"2018-12-17 17:21:26","index":100},"message":"操作成功"}}';
+echo '<pre>';
+// print_r(unserialize('a:22:{i:1962;i:20000000;i:1960;i:20000000;i:1958;i:20000000;i:1956;i:1020000000;i:1954;i:940000000;i:1952;s:8:"10000000";i:1950;s:8:"10000000";i:1940;s:8:"10000000";i:1930;s:8:"10000000";i:1920;s:8:"10000000";i:1910;s:8:"10000000";i:1900;s:8:"10000000";i:1890;s:8:"10000000";i:1880;s:8:"10000000";i:1870;s:8:"10000000";i:1860;s:8:"10000000";i:1850;s:8:"10000000";i:1840;s:8:"10000000";i:1830;s:8:"10000000";i:1820;s:8:"10000000";i:1810;s:8:"10000000";i:1800;s:8:"10000000";}'));
+print_r(json_decode('{"time":1544671997869,"current":{"periodNumber":925911,"awardTime":"2018-12-13 11:30:00","awardNumbers":"05,08,09,15,20,30,42,43,45,48,49,52,53,56,60,61,64,71,72,74","pan":"3"},"next":{"periodNumber":925912,"awardTime":"2018-12-13 11:35:00","awardTimeInterval":102130,"delayTimeInterval":15}}', true));
+// echo date('Y-m-d H:i:s', 1544671997);
+echo rand(100000, 999999) . time();
+print_r($arr);
+array_unshift($arr, 'hahaha..');
+print_r($arr);
+array_unshift($arr, 'xixixi..');
+print_r($arr);
+print_r(json_decode($res, true));
+echo '</pre>';
+var_dump(preg_match('`^\d,\d,\d$`i', '1,1,1'));
+echo '<br>', substr(md5('latest1'), 8, 16);
+if ('2.0' > '1.9.9') {
+    echo 'ivyivy ', ('2.0.14' - '1.9.9');
+} else echo 'bill';
+var_dump(!'1');
+
+function breakUpdateTime($start_time,$end_time,$days = 6 ){
+    if(empty($start_time) || empty($end_time)){
+        return [];
+    }
+    $qitianqian = date('Y-m-d',strtotime('-'.$days.' days'));
+    //算上今天 七天前的数据
+    if(strtotime($end_time)<strtotime($qitianqian)){
+        return [
+            'now' => [],
+            'history' => ['start_time'=>$start_time,'end_time'=>$end_time],
+        ];
+    }else if(strtotime($start_time)<strtotime($qitianqian)&&strtotime($end_time)>= strtotime($qitianqian)){
+        return [
+            'now' => ['start_time'=>$qitianqian,'end_time'=>$end_time],
+            'history' => ['start_time'=>$start_time,'end_time'=>$qitianqian],
+        ];
+    }else{
+        return [
+            'now' => ['start_time'=>$start_time,'end_time'=>$end_time],
+            'history' => [],
+        ];
+    }
+}
+$arr = breakUpdateTime('2018-12-18', '2018-12-18');
+var_dump($arr);
+echo '2018-12-21 18:50:00<br>', date('Y-m-d H:i:s', 1545404532);
+echo '<br>', microtime(true);
+echo '<br>', microtime();
+$dom = new DOMDocument();
+// var_dump($dom);
+var_dump($dom->loadHTMLFile('test2.html'));
+// var_dump($dom);
+// echo $dom->saveHTML();
+$div = $dom->getElementsByTagName('div');
+// var_dump($div);
+foreach ($div as $k => $v) {
+    // var_dump($v);
+    echo $k ,': ', $v->nodeValue , PHP_EOL;
+}
+$arr = dom_to_array($div[0]);
+// $arr = dom2array($div[0]);
+// var_dump($arr);
+// var_dump($arr['div']['#text'][0]);
+
+$s = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <response>
+            <resData foo="1">
+                <contact:infData xmlns:contact="http://example.com/contact-1.0" bar="1">
+                    <contact:status s="value1"/>
+                    <contact:status s="value2"/>
+                    <contact:status s="value3"/>
+                    <contact:status s="value4"/>
+                </contact:infData>
+            </resData>
+        </response>';
+
+$xml = new DOMDocument();
+$xml->loadXML($s);
+$xmlArray = xml_to_array($xml);
+echo '<pre>';
+print_r($xmlArray);
+echo '</pre>';
+echo date('Y-m-d H:i:s', 1536562291) ,'<br>', date('Y-m-d H:i:s', 1545740404);
+$i = '2.1.1';
+echo '<br>', (float)$i;
+
+$codes = explode(',', '4,6,3,9,7,2,5,10,1,8');
+var_dump($codes);
+foreach ($codes as $codeKey => &$codeValue) {
+    $codeValue = str_pad($codeValue, 2, 0, STR_PAD_LEFT);
+}
+var_dump($codes);
+$number = implode(' ', $codes);
+echo $number;
+if (!preg_match('`^([01]\d\s){9}[01]\d$`Ui', $number)) {
+    echo 'bill';
+} else echo 'ivy';
+echo '<br>', substr(md5('res5'), 8, 16) ,'<br>', substr(md5('latest5'), 8, 16);
+
+function sumColor($color)
+    {
+        $c_arr = [1 => 0, 2 => 0, 3 => 0];
+        $r = $s = end($color);
+        for ($i=0; $i < 7; $i++) { 
+            if ($color[$i] == 1) $c_arr[1]++;
+            elseif ($color[$i] == 2) $c_arr[2]++;
+            elseif ($color[$i] == 3) $c_arr[3]++;
+        }
+        $max = max($c_arr);
+        $min = min($c_arr);
+        if ($max > 3 || ($max == 3 && $min == 2)) {
+            $r = array_search($max, $c_arr);
+        } elseif (array_search($min, $c_arr) == $s) {
+            $r = 4;
+        }
+        return $r;
+    }
+echo '<br>ivy1234:', sumColor([2,2,1,1,1,2,3]);
+
+$a = array (
+  592 =>
+  array (
+    'member_link_id' => 592,
+    'amount' => '300000.00',
+  ),
+);
+echo '<br>', array_sum(array_column($a, 'amount'));
+echo '<br>', strtotime(date('2018-12-29'));
+preg_match('/[\w][\w-]*\.(?:com\.cn|com|cn|co|net|org|gov|cc|biz|info)(\?|\/|$)/isU', 'http://www.xy0test.com', $addurl);
+var_dump($addurl);
+
+if (!empty($addurl)) {
+    echo str_replace($addurl[1], '', $addurl[0]);
+}
+if ('010' == '0010') {
+    echo 'hello 8xian:', trim(addslashes("001'")), intval(-1);
+} else echo 'hello bill';
+echo abs(-15);
+
+$v = '/images_fh/upload/2018/12/1545909171359.gif';
+preg_match('@.*(images_fh.*)$@', $v, $macth);
+var_dump($macth);
+
+$a = [['name' => 'bill', 'a' => 'aa'], ['name' => 'i', 'b' => 'bb']];
+echo reset($a)['name'];
+echo '<br>', date('Y-m-d H:i:s');
+
+$tmpArr = explode(',', '2,9,5,1,8,6,4,7,3,10');
+for ($i=0; $i < 10; $i++) { 
+    $tmpArr[$i] = sprintf('%02d', $tmpArr[$i]);
+}
+$tmpNumber = implode(' ', $tmpArr);
+if (!preg_match('`^([01]\d\s){9}[01]\d$`Ui', $tmpNumber)) 
+    echo 'hello bill';
+else echo 'hello joker';
+
+if (preg_match('`^(\d{2}\s{1}){9}\d{2}$`', $tmpNumber))
+    echo 'hello world';
+else echo 'hello ivy';
+
+$x = $y = $z = $i = 0;
+$arr = [];
+for ($x=0; $x < 10; $x++) { 
+    for ($y=0; $y < 10; $y++) { 
+        for ($z=0; $z < 10; $z++) { 
+            $sum = $x + $y + $z;
+            if (isset($arr[$sum])) $arr[$sum]++;
+            else $arr[$sum] = 1;
+            $i++;
+        }
+    }
+}
+echo '<br>', $i;
+echo date('Y-m-d H:i:s', 1548759835) ,'<br>', date('Y-m-d H:i:s', 1548759942);
+// var_dump(preg_match('`^[a-zA-Z0-9_\-]{6,20}$`', '1234789999'));
 // 
 // hset(lottery, issue, info);
 // set(lottery, issue);
@@ -539,16 +777,29 @@ echo json_encode($a);
 // hget(key, field) 获取hash，key键、field域
 // hset(key, field, value) 设置hash，value值
 // zadd(key, score, member) 设置sorted set有序集合，score分（排序分值，可重复），member成员（值，唯一）
-// zremrangebyrank(key, start, stop) 移除sorted set，start开始索引，stop停止索引
+// zremrangebyrank(key, start, stop) 移除sorted set，start开始索引，stop停止索引，按rank移除
+// zremrangebyscore(key, min, max) 根据score移除key的member，score介于min和max之间
+// zrem(key, member, member...) 移除key的member
+// zrange(key, start, stop, [withscores]) 获取有序集合（递增），withscores带上分数
+// zrevrange(key, start, stop, [withscores]) 获取有序集合（递减），withscores带上分数
+// zrangebyscore(key, min, max, [withscores]) 获取有序集合，分数介于min和max之间（顺序）
+// zrevrangebyscore(key, max, min, [withscores]) 获取有序集合，分数介于min和max之间(逆序)
+// zcard(key) 获取有序集合个数
+// zcount(key, min, max) 获取有序集合分数在min和max之间的成员数
+// zincrby(key, increment, member) 为member成员的score值加上增量increment
+// zrank(key, member) 获取member的排名，从0开始，递增
+// zrevrank(key, member) 获取member的排名，从0开始，递减
+// zscore(key, member) 获取member的score
+// zunionstore(key, destination, numkeys, key, [key]...) numkeys个key的并集放入destination
+// zinterstore(key, destination, numkeys, key, [key]...) numkeys个key的交集放入destination
 // result_pc 北京PC28开奖结果
 // yc_pc 北京PC28预测
 // result_jnd 加拿大PC28
 // yc_jnd
 // result_xj_10 新疆PC28 新疆时时彩
 // yc_xj
-// result_cq_10 重庆PC28
+// result_cq_10 重庆PC28 重庆时时彩
 // yc_cq
-// result_cq_10 重庆时时彩
 // result_pk_10 北京PK10
 // result_nc_10 幸运农场
 // result_gd_10 广东快乐十分
@@ -559,6 +810,22 @@ echo json_encode($a);
 // 不断读redis
 // redis应用
 // 限制接口请求频率
+// 雏鹰企业、瞪羚企业、潜在独角兽企业、独角兽企业、平台生态型龙头企业
+// 47.90.98.84 5922
+// 47.52.65.220 2259
+// 47.52.72.102 2259
+// 描述
+// 请求地址
+// 请求方法
+// 请求参数
+// 响应参数
+// 请求示例
+
+// 公共请求参数
+
+// 公共响应参数
+// code 0success 1error
+// msg
 
 // hset(lottery1-10, issue, info);
 // hvals(lottery1-10); // 获取所有info
@@ -716,3 +983,4 @@ echo json_encode($a);
 // 
 // 腾讯分分彩出现数据超过2期（含2期）未更新，重复号码现象，当期将不出开奖结果，直至数据恢复正常
 // 
+// if u change nothing,nothing will be changed.
